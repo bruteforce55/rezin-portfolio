@@ -32,11 +32,13 @@ interface IDEContextValue {
   activity: ActivityView;
   paletteOpen: boolean;
   terminalOpen: boolean;
+  sidebarOpen: boolean;
   openFile: (f: FileId) => void;
   closeTab: (f: FileId) => void;
   setActiveTab: (f: FileId) => void;
   setActivity: (a: ActivityView) => void;
   setPaletteOpen: (b: boolean) => void;
+  setSidebarOpen: (b: boolean) => void;
   toggleTerminal: () => void;
 }
 
@@ -48,10 +50,14 @@ export function IDEProvider({ children }: { children: ReactNode }) {
   const [activity, setActivity] = useState<ActivityView>("explorer");
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [terminalOpen, setTerminalOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const openFile = useCallback((f: FileId) => {
     setOpenTabs((tabs) => (tabs.includes(f) ? tabs : [...tabs, f]));
     setActiveTab(f);
+    if (typeof window !== "undefined" && window.innerWidth < 768) {
+      setSidebarOpen(false);
+    }
   }, []);
 
   const closeTab = useCallback((f: FileId) => {
@@ -80,11 +86,13 @@ export function IDEProvider({ children }: { children: ReactNode }) {
         activity,
         paletteOpen,
         terminalOpen,
+        sidebarOpen,
         openFile,
         closeTab,
         setActiveTab,
         setActivity,
         setPaletteOpen,
+        setSidebarOpen,
         toggleTerminal,
       }}
     >

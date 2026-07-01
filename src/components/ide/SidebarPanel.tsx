@@ -6,21 +6,28 @@ import { ProjectsView } from "./ProjectsView";
 import { ContactFile } from "./files/ContactFile";
 
 export function SidebarPanel() {
-  const { activity } = useIDE();
+  const { activity, sidebarOpen, setSidebarOpen } = useIDE();
 
-  if (activity === "contact") {
-    // Open contact in editor instead; still show explorer here
-    return <Explorer />;
-  }
+  if (!sidebarOpen) return null;
+
+  const displayActivity = activity === "contact" ? "explorer" : activity;
 
   return (
-    <div className="w-64 shrink-0 bg-[var(--color-sidebar)] border-r border-border hidden md:flex flex-col">
-      {activity === "explorer" && <Explorer />}
-      {activity === "search" && <SearchView />}
-      {activity === "git" && <GitView />}
-      {activity === "projects" && <ProjectsView />}
-      {activity === "settings" && <SettingsView />}
-    </div>
+    <>
+      {/* Mobile backdrop to click-away and close sidebar */}
+      <div
+        className="fixed inset-0 z-30 bg-black/30 md:hidden"
+        onClick={() => setSidebarOpen(false)}
+      />
+
+      <div className="fixed left-12 top-9 bottom-9 w-64 bg-[var(--color-sidebar)] border-r border-border z-40 flex flex-col shadow-2xl md:static md:h-full md:w-64 md:shrink-0 md:bg-[var(--color-sidebar)] md:border-r md:border-border md:shadow-none">
+        {displayActivity === "explorer" && <Explorer />}
+        {displayActivity === "search" && <SearchView />}
+        {displayActivity === "git" && <GitView />}
+        {displayActivity === "projects" && <ProjectsView />}
+        {displayActivity === "settings" && <SettingsView />}
+      </div>
+    </>
   );
 }
 

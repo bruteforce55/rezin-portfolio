@@ -21,7 +21,7 @@ const items: { id: ActivityView; icon: React.ComponentType<{ className?: string 
 ];
 
 export function ActivityBar() {
-  const { activity, setActivity, toggleTerminal, openFile } = useIDE();
+  const { activity, setActivity, toggleTerminal, openFile, sidebarOpen, setSidebarOpen } = useIDE();
   return (
     <div className="w-12 shrink-0 bg-[var(--color-activitybar)] border-r border-border flex flex-col items-center py-2">
       {items.map(({ id, icon: Icon, label }) => {
@@ -40,7 +40,12 @@ export function ActivityBar() {
                 openFile("contact.tsx");
                 return;
               }
-              setActivity(id);
+              if (activity === id) {
+                setSidebarOpen(!sidebarOpen);
+              } else {
+                setActivity(id);
+                setSidebarOpen(true);
+              }
             }}
             title={label}
             className={cn(
