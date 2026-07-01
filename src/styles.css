@@ -1,0 +1,183 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* IDE-specific semantic tokens */
+  --color-titlebar: var(--titlebar);
+  --color-activitybar: var(--activitybar);
+  --color-sidebar: var(--sidebar);
+  --color-editor: var(--editor);
+  --color-statusbar: var(--statusbar);
+  --color-tab-active: var(--tab-active);
+  --color-tab-inactive: var(--tab-inactive);
+  --color-line-number: var(--line-number);
+
+  --color-syntax-keyword: var(--syntax-keyword);
+  --color-syntax-string: var(--syntax-string);
+  --color-syntax-function: var(--syntax-function);
+  --color-syntax-variable: var(--syntax-variable);
+  --color-syntax-comment: var(--syntax-comment);
+  --color-syntax-number: var(--syntax-number);
+  --color-syntax-type: var(--syntax-type);
+  --color-syntax-property: var(--syntax-property);
+  --color-syntax-operator: var(--syntax-operator);
+
+  --color-accent-blue: var(--accent-blue);
+  --color-accent-green: var(--accent-green);
+  --color-accent-amber: var(--accent-amber);
+  --color-accent-pink: var(--accent-pink);
+
+  /* dark variants for shadcn ports */
+  --color-sidebar-foreground: var(--foreground);
+  --color-sidebar-primary: var(--primary);
+  --color-sidebar-primary-foreground: var(--primary-foreground);
+  --color-sidebar-accent: var(--accent);
+  --color-sidebar-accent-foreground: var(--accent-foreground);
+  --color-sidebar-border: var(--border);
+  --color-sidebar-ring: var(--ring);
+}
+
+:root,
+.dark {
+  --radius: 0.5rem;
+
+  /* Base palette — VS Code-inspired but refined */
+  --background: oklch(0.18 0.012 260);
+  --foreground: oklch(0.92 0.008 250);
+
+  --titlebar: oklch(0.16 0.012 260);
+  --activitybar: oklch(0.155 0.012 260);
+  --sidebar: oklch(0.20 0.012 260);
+  --editor: oklch(0.205 0.012 260);
+  --statusbar: oklch(0.45 0.13 250);
+  --tab-active: oklch(0.205 0.012 260);
+  --tab-inactive: oklch(0.17 0.012 260);
+  --line-number: oklch(0.45 0.02 260);
+
+  --card: oklch(0.22 0.012 260);
+  --card-foreground: oklch(0.92 0.008 250);
+  --popover: oklch(0.20 0.012 260);
+  --popover-foreground: oklch(0.92 0.008 250);
+
+  --primary: oklch(0.68 0.16 250);
+  --primary-foreground: oklch(0.99 0.005 250);
+  --secondary: oklch(0.26 0.012 260);
+  --secondary-foreground: oklch(0.92 0.008 250);
+  --muted: oklch(0.24 0.012 260);
+  --muted-foreground: oklch(0.62 0.015 260);
+  --accent: oklch(0.28 0.02 250);
+  --accent-foreground: oklch(0.95 0.008 250);
+  --destructive: oklch(0.62 0.21 25);
+  --destructive-foreground: oklch(0.99 0.005 250);
+
+  --border: oklch(0.27 0.012 260);
+  --input: oklch(0.27 0.012 260);
+  --ring: oklch(0.68 0.16 250);
+
+  /* Syntax — based on Dark+ but cleaner */
+  --syntax-keyword: oklch(0.70 0.16 320);   /* purple/pink — const, export */
+  --syntax-string: oklch(0.75 0.12 50);     /* warm orange */
+  --syntax-function: oklch(0.82 0.14 90);   /* yellow */
+  --syntax-variable: oklch(0.78 0.10 220);  /* light blue */
+  --syntax-comment: oklch(0.50 0.03 150);   /* muted green */
+  --syntax-number: oklch(0.78 0.13 140);    /* green */
+  --syntax-type: oklch(0.74 0.13 190);      /* teal */
+  --syntax-property: oklch(0.78 0.10 220);
+  --syntax-operator: oklch(0.85 0.01 250);
+
+  --accent-blue: oklch(0.68 0.16 250);
+  --accent-green: oklch(0.72 0.16 145);
+  --accent-amber: oklch(0.78 0.15 75);
+  --accent-pink: oklch(0.72 0.18 0);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+  }
+  ::selection {
+    background-color: color-mix(in oklab, var(--primary) 35%, transparent);
+  }
+}
+
+@utility scrollbar-ide {
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: color-mix(in oklab, var(--foreground) 12%, transparent);
+    border-radius: 6px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: color-mix(in oklab, var(--foreground) 22%, transparent);
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
+}
+
+@utility cursor-blink {
+  &::after {
+    content: "";
+    display: inline-block;
+    width: 0.55ch;
+    height: 1em;
+    margin-left: 1px;
+    vertical-align: text-bottom;
+    background: var(--color-foreground);
+    animation: cursor-blink 1s steps(2) infinite;
+  }
+}
+
+@keyframes cursor-blink {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
