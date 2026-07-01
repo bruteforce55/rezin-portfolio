@@ -19,7 +19,7 @@ export const Route = createFileRoute("/")({
           "Full Stack Engineer with 4+ years building scalable enterprise systems with React, Node.js, TypeScript, Redis, PostgreSQL, and AWS. Explore projects, experience, and a working terminal — inside an IDE.",
       },
       { property: "og:title", content: "Rezin Muhammed — Full Stack Engineer" },
-      { property: "og:description", content: "A portfolio built as a working IDE — projects, experience, skills, terminal." },
+      { property: "og:description", content: "A portfolio IDE — projects, experience, skills, terminal." },
     ],
   }),
   component: IDEPage,
